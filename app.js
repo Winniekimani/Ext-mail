@@ -14,5 +14,10 @@ Ext.application({
     ],
 
     // The name of the initial view to create.
-    mainView: 'ExtMail.view.main.Main'
+    mainView: 'ExtMail.view.main.Main',
+
+    onBeforeLaunch: function() {
+        ExtMail.util.BaseUrl.setBaseUrl('http://localhost:3000/');
+        this.callParent(arguments);
+    }
 });

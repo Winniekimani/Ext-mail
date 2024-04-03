@@ -7,7 +7,7 @@ Ext.define('ExtMail.store.Labels', {
         expanded: true
     },
     proxy: {
-        type: 'ajax',
-         url: 'data/labels.json', 
+        type: 'rest',
+        url: 'labels',
     }
 });

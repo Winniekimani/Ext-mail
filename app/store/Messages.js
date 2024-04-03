@@ -10,8 +10,8 @@ Ext.define('ExtMail.store.Messages', {
         }
     ],
     proxy: {
-        type: 'ajax',
-        url: 'data/messages.json', 
+        type: 'rest',
+        url: 'mails',
         reader: {
             type: 'json',
             rootProperty: 'rows'

@@ -4,11 +4,13 @@ Ext.define('ExtMail.store.Contacts', {
     model: 'ExtMail.model.Contact',
     autoLoad: true,
     proxy: {
-        type: 'ajax',
-        url: 'data/contacts.json',
+        type: 'rest',
+        url: 'contacts',
         reader: {
             type: 'json',
-            rootProperty: 'rows'
+            transform: function(data) {
+                return Ext.Array.map(data.result, ExtMail.util.Object.snakeCaseToCamelCase);
+            }
         }
     }
 });
