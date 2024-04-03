@@ -5,5 +5,6 @@ Ext.define('ExtMail.enums.Labels', {
     STARRED: 2,
     SENT: 3,
     DRAFTS: 4,
-    ALL_MAIL: 5
+    ALL_MAIL: 5,
+    ARCHIVED: 6
 });

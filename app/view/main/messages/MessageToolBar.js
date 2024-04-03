@@ -20,6 +20,24 @@ Ext.define('ExtMail.view.messages.MessagesToolBar', {
             bind: {
                 hidden: '{!selectedMessage}'
             }
+        },
+        {
+            tooltip: 'Archive',
+            iconCls: 'x-fa fa-archive',
+            handler: 'onArchiveClick',
+            hidden: true,
+            bind:{
+                hidden: '{!selectedMessage}'
+            }
+        },
+        {
+            tooltip: 'Un-Archive',
+            iconCls: 'x-fa fa-folder-minus',
+            handler: 'onUnArchiveClick',
+            hidden: true,
+            bind:{
+                hidden: '{!selectedMessage}'
+            }
         }
     ],
 
@@ -29,5 +47,13 @@ Ext.define('ExtMail.view.messages.MessagesToolBar', {
 
     onBackClick: function() {
         this.fireEvent('back')
+    },
+
+    onArchiveClick: function(){
+        this.fireEvent('archive');
+    },
+
+    onUnArchiveClick: function(){
+        this.fireEvent('unarchive');
     }
 });

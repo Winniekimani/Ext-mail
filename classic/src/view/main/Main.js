@@ -87,7 +87,8 @@ Ext.define('ExtMail.view.main.Main', {
                         back: 'onBackToMessagesGrid',
                         delete: 'onDeleteMessage',
                         markunread: 'onMarkMessageUnread',
-                        archive: 'onArchiveMessage'
+                        archive: 'onArchiveMessage',
+                        unarchive: 'onUnArchiveMessage'
                     }
                 }
             ],
