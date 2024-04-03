@@ -35,6 +35,16 @@ Ext.define('ExtMail.view.messages.MessagesToolbar', {
                     }
                 },
                 {
+                    tooltip: 'Un-Archive',
+                    iconCls: 'x-fa fa-folder-minus',
+                    handler: this.makeHandler('unarchive'),
+                    scope: this,
+                    hidden: true, // hide from start
+                    bind: {
+                        hidden: '{!visibleMessageButtons.unarchive}'
+                    }
+                },
+                {
                     tooltip: 'Delete',
                     iconCls: 'x-fa fa-trash',
                     handler: this.makeHandler('delete'),

@@ -145,10 +145,24 @@ Ext.define('ExtMail.view.main.MainControllerBase', {
     /**
      * Handler for click on the `archive` button.
      * Removes the INBOX label from the `selectedMessage` record, and moves
+     * back to the ArchiveGrid
+     * @param {ExtMail.model.Message} messageRecord
+     */
+    onArchiveMessage: function(messageRecord) {
+        this.getViewModel().get('selectedMessage').removeLabel(ExtMail.enums.Labels.INBOX);
+        this.getViewModel().get('selectedMessage').addLabel(ExtMail.enums.Labels.ARCHIVED);
+
+        this.onBackToMessagesGrid();
+    },
+
+    /**
+     * Handler for click on the `un-archive` button.
+     * Removes the Archive label from the `selectedMessage` record, and moves
      * back to the MessageGrid
      */
-    onArchiveMessage: function() {
-        this.getViewModel().get('selectedMessage').removeLabel(ExtMail.enums.Labels.INBOX);
+    onUnArchiveMessage: function(messageRecord) {
+        this.getViewModel().get('selectedMessage').removeLabel(ExtMail.enums.Labels.ARCHIVED);
+        this.getViewModel().get('selectedMessage').addLabel(ExtMail.enums.Labels.INBOX);
 
         this.onBackToMessagesGrid();
     },

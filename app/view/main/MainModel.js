@@ -47,7 +47,8 @@ Ext.define('ExtMail.view.main.MainModel', {
                 spacer: messageSelected && !isOutgoing,
                 delete: messageSelected && !isOutgoing,
                 markUnread: messageSelected && !isOutgoing,
-                archive: messageSelected && !isOutgoing
+                archive: messageSelected && !isOutgoing,
+                unarchive: messageSelected && !isOutgoing
             };
         }
     },
