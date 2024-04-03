@@ -1,5 +1,13 @@
 Ext.define('ExtMail.model.Message', {
     extend: 'Ext.data.Model',
+
+    requires: [
+        'Ext.data.identifier.Sequential',
+        'ExtMail.store.MessageLabels'
+    ],
+
+    identifier : 'sequential',
+
     fields: [
         {
             name: 'firstName'
@@ -32,7 +40,8 @@ Ext.define('ExtMail.model.Message', {
         {
             name: 'labels', // an array of MyDashboard.enums.Labels
             type: 'auto',
-            defaultValue: []
+            defaultValue: [],
+            persist: false
         },
         {
             name: 'unread',
@@ -50,15 +59,25 @@ Ext.define('ExtMail.model.Message', {
             name: 'sent',
             type: 'boolean'
         }
-    ],/**
+    ],
+    
+    hasMany: [
+        {
+            model: 'ExtMail.model.MessageLabel',
+            name: 'labels',
+            storeConfig: {
+                type: 'MessageLabels',
+            },
+        }
+    ],
+    
+    /**
     * Returns true if the Message has the given label Id
     * @param {MyDashboard.enums.Label} labelId 
     * @returns 
     */
    hasLabel: function(labelId) {
-       var labels = this.get('labels') || [];
-
-       return labels.indexOf(labelId) >= 0
+        return this.labels().findExact('labelId', labelId) >= 0;
    },
 
    /**
@@ -67,11 +86,16 @@ Ext.define('ExtMail.model.Message', {
     * @returns 
     */
    addLabel: function(labelId) {
-       var labels = this.get('labels') || [];
-
-       labels.push(labelId);
-
-       this.set('labels', Ext.clone(labels)); // clone so it triggers an update on the record
+    var labels = this.get('labels') || [];
+    
+    labels.push(labelId);
+    
+    this.set('labels', Ext.clone(labels)); // clone so it triggers an update on the record
+    
+    this.labels().add({
+        messageId: this.getId(),
+        labelId: labelId
+    });
    },
 
    /**
@@ -80,10 +104,14 @@ Ext.define('ExtMail.model.Message', {
     * @returns 
     */
    removeLabel: function(labelId) {
-       var labels = this.get('labels') || [];
-
-       labels = Ext.Array.remove(labels, labelId);
-
-       this.set('labels', Ext.clone(labels)); // clone so it triggers an update on the record
+    var labels = this.get('labels') || [];
+    
+    labels = Ext.Array.remove(labels, labelId);
+    
+    this.set('labels', Ext.clone(labels)); // clone so it triggers an update on the record
+    
+    var index = this.labels().findExact('labelId', labelId);
+    
+    this.labels().removeAt(index);
    }
 });

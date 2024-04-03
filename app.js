@@ -17,7 +17,7 @@ Ext.application({
     mainView: 'ExtMail.view.main.Main',
 
     onBeforeLaunch: function() {
-        ExtMail.util.BaseUrl.setBaseUrl('http://localhost:3000/');
+        // ExtMail.util.BaseUrl.setBaseUrl('http://localhost:3000/');
         this.callParent(arguments);
     }
 });
